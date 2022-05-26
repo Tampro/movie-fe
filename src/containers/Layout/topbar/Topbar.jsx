@@ -18,12 +18,12 @@ const Topbar = () => {
     return (
         <Navbar color="dark" expand="md" dark className="fixed-top">
           <div className="container">
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div className="collapse navbar-collapse" id="navbarCollapse">
               <NavbarBrand href="/" className="topbar__logo mr-auto">
                 <TheaterIcon className="topbar__logo-icon" />
                 FUNNY MOVIES
               </NavbarBrand>
-              <ul class="navbar-nav me-auto mb-2 mb-md-0"></ul>
+              <ul className="navbar-nav me-auto mb-2 mb-md-0"></ul>
               {isLogin?(
                   <Form inline className="d-flex">
                
