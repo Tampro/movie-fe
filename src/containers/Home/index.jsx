@@ -22,7 +22,83 @@ const Home = () => {
         <div className="col-auto d-lg-block">
           <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
         </div>
-        <div className="col d-flex flex-column position-static ms-4">
+        <div className="col d-flex flex-column position-static ms-5">
+
+          <h3 className="mb-2 text-danger">Featured post</h3>
+          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
+          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
+          <div className="mb-1">Description:</div>
+          <p>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+          </p>
+        </div>
+      </div>
+      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
+        <div className="col-auto d-lg-block">
+          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+        </div>
+        <div className="col d-flex flex-column position-static ms-5">
+
+          <h3 className="mb-2 text-danger">Featured post</h3>
+          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
+          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
+          <div className="mb-1">Description:</div>
+          <p>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+          </p>
+        </div>
+      </div>
+      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
+        <div className="col-auto d-lg-block">
+          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+        </div>
+        <div className="col d-flex flex-column position-static ms-5">
+
+          <h3 className="mb-2 text-danger">Featured post</h3>
+          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
+          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
+          <div className="mb-1">Description:</div>
+          <p>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+          </p>
+        </div>
+      </div>
+      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
+        <div className="col-auto d-lg-block">
+          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+        </div>
+        <div className="col d-flex flex-column position-static ms-5">
+
+          <h3 className="mb-2 text-danger">Featured post</h3>
+          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
+          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
+          <div className="mb-1">Description:</div>
+          <p>
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This is a wider card with supporting text below as a natural lead-in
+            to additional content.
+          </p>
+        </div>
+      </div>
+      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
+        <div className="col-auto d-lg-block">
+          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+        </div>
+        <div className="col d-flex flex-column position-static ms-5">
 
           <h3 className="mb-2 text-danger">Featured post</h3>
           <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
@@ -38,6 +114,8 @@ const Home = () => {
         </div>
       </div>
     </div>
+
+    
   );
 };
 

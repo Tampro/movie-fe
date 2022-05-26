@@ -24,5 +24,6 @@ In the project directory, you can run:
 npm i node-sass
 npm i mdi-react
 npm i react-youtube
+npm i react-router-dom
 
 ```
