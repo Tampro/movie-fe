@@ -18,4 +18,9 @@ In the project directory, you can run:
  npm i reactstrap
  npm i --save bootstrap 
 ```
+## add scss
 
+```
+npm i node-sass
+
+```
