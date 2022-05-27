@@ -4,7 +4,7 @@ const Share = () => {
   return (
     <div className="col-md-6 offset-md-3">
       <Form>
-        <fieldset className="border p-2">
+        <fieldset className="border p-4">
           <legend className="float-none w-auto p-2">Share a Youtube movie</legend>
 
           <FormGroup row>
@@ -16,12 +16,11 @@ const Share = () => {
                 type="text"
                 name="youtubeUrl"
                 id="youtubeUrl"
-                className="col-md-8"
               />
             </Col>
           </FormGroup>
-          <Col sm={{ size: 10, offset: 2 }}>
-            <Button>Share</Button>
+          <Col sm={{ size: 10, offset: 2 }} className="ps-1">
+            <Button className="w-100">Share</Button>
           </Col>
         </fieldset>
       </Form>

@@ -15,6 +15,7 @@ const Home = () => {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
+    origin: 'http://localhost:3001' 
   };
   return (
     <div className="col-md-8 offset-md-2">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TheaterIcon from "mdi-react/TheaterIcon";
 
 import {
@@ -16,42 +16,52 @@ import {
 import axios from "axios";
 
 const Topbar = () => {
-  const [isLogin, setIsLogin] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
   const submit = async (e) => {
     e.preventDefault();
 
     const response = await axios
       .post(
-        "http://localhost:8000/api/user/login-or-register",
+        "user/login-or-register",
         {
           email,
           password,
         },
         { withCredentials: true }
-      ).then(res => {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
-        setIsLogin(true);
+      )
+      .then((res) => {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res.data.token}`;
       })
       .catch(function (err) {
         if (err.response) {
-            switch (err.response.status) {
-                case 400:
-                    setPopoverOpen(err.response.data.message);
-                    break;
-                case 401:
-                    setPopoverOpen(err.response.data.message);
-                    break;
-            }
+          switch (err.response.status) {
+            case 400:
+              setPopoverOpen(err.response.data.message);
+              break;
+            case 401:
+              setPopoverOpen(err.response.data.message);
+              break;
+          }
         }
       });
-    if (typeof response !== 'undefined') {
-     
-    }
   };
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get("user/me");
+        setUser(data);
+      } catch (e) {
+       
+      }
+    })();
+  }, []);
+
   return (
     <Navbar color="dark" expand="md" dark className="fixed-top">
       <div className="container">
@@ -61,7 +71,7 @@ const Topbar = () => {
             FUNNY MOVIES
           </NavbarBrand>
           <ul className="navbar-nav me-auto mb-2 mb-md-0"></ul>
-          {!isLogin ? (
+          {!user ? (
             <Form inline className="d-flex" onSubmit={submit}>
               <Input
                 id="userEmail"
@@ -95,7 +105,7 @@ const Topbar = () => {
           ) : (
             <div className="d-flex">
               <Label className="navbar-text me-5 mt-auto mb-auto">
-                tam@tam.com
+                {user?.email}
               </Label>
               <Button href="/share" className="me-5 mt-auto mb-auto">
                 Share a movie
