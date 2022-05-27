@@ -21,6 +21,18 @@ const Topbar = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
+  async function fetchData() {
+    try {
+      const { data } = await axios.get("user/me");
+      setUser(data);
+    } catch (e) {}
+  }
+  useEffect(() => {
+    (async () => {
+      fetchData();
+    })();
+  }, []);
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -37,6 +49,7 @@ const Topbar = () => {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
+        fetchData();
       })
       .catch(function (err) {
         if (err.response) {
@@ -51,16 +64,12 @@ const Topbar = () => {
         }
       });
   };
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get("user/me");
-        setUser(data);
-      } catch (e) {
-       
-      }
-    })();
-  }, []);
+
+  const logout = async () => {
+    await axios.post("user/logout", {}, { withCredentials: true });
+    setUser(null);
+    axios.defaults.headers.common["Authorization"] = "";
+  };
 
   return (
     <Navbar color="dark" expand="md" dark className="fixed-top">
@@ -110,7 +119,9 @@ const Topbar = () => {
               <Button href="/share" className="me-5 mt-auto mb-auto">
                 Share a movie
               </Button>
-              <Button className="mt-auto mb-auto">Logout</Button>
+              <Button className="mt-auto mb-auto" onClick={logout}>
+                Logout
+              </Button>
             </div>
           )}
         </div>
