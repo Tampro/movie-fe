@@ -1,5 +1,3 @@
-
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -16,8 +14,9 @@ In the project directory, you can run:
 
 ```
  npm i reactstrap
- npm i --save bootstrap 
+ npm i --save bootstrap
 ```
+
 ## add scss
 
 ```
@@ -33,4 +32,12 @@ npm i react-router-dom
 ```
 npm i axios
 
+```
+
+# add react toolkit
+
+```
+ npm i react-redux
+ npm i -D @types/react-redux
+ npm i @reduxjs/toolkit
 ```

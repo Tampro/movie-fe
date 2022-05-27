@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import ThumbUpIcon from "mdi-react/ThumbUpIcon";
 import ThumbDownIcon from "mdi-react/ThumbDownIcon";
 import { Button } from "reactstrap";
+import axios from "axios";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 const Home = () => {
+  const [reload, setReload] = useState(false);
+  const user = useSelector((state: RootState) => state.user.value);
   const onPlayerReady = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   };
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get("movie");
+      setMovies(data);
+    })();
+  }, [reload]);
+
   const opts = {
     height: "250",
     width: "350",
@@ -15,108 +29,82 @@ const Home = () => {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
-    origin: 'http://localhost:3001' 
+    origin: "http://localhost:3001",
+  };
+
+  const likeMovie = async (movieId, like) => {
+    const { data } = await axios.post("like-movie",{
+        "like":like,
+        "movieId":movieId,
+        "userId": user?.id
+    }, { withCredentials: true });
+    setReload(!reload);
   };
   return (
     <div className="col-md-8 offset-md-2">
-      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
-        <div className="col-auto d-lg-block">
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-        </div>
-        <div className="col d-flex flex-column position-static ms-5">
+      {movies.map((movie) => {
+        const like = movie.likeMovies.filter(function (item) {
+          return item.like == true;
+        }).length;
 
-          <h3 className="mb-2 text-danger">Featured post</h3>
-          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
-          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
-          <div className="mb-1">Description:</div>
-          <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-        </div>
-      </div>
-      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
-        <div className="col-auto d-lg-block">
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-        </div>
-        <div className="col d-flex flex-column position-static ms-5">
+        const myLike = movie.likeMovies.filter(function (item) {
+          return item.userId === user?.id;
+        });
 
-          <h3 className="mb-2 text-danger">Featured post</h3>
-          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
-          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
-          <div className="mb-1">Description:</div>
-          <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-        </div>
-      </div>
-      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
-        <div className="col-auto d-lg-block">
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-        </div>
-        <div className="col d-flex flex-column position-static ms-5">
-
-          <h3 className="mb-2 text-danger">Featured post</h3>
-          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
-          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
-          <div className="mb-1">Description:</div>
-          <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-        </div>
-      </div>
-      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
-        <div className="col-auto d-lg-block">
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-        </div>
-        <div className="col d-flex flex-column position-static ms-5">
-
-          <h3 className="mb-2 text-danger">Featured post</h3>
-          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
-          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
-          <div className="mb-1">Description:</div>
-          <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-        </div>
-      </div>
-      <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
-        <div className="col-auto d-lg-block">
-          <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
-        </div>
-        <div className="col d-flex flex-column position-static ms-5">
-
-          <h3 className="mb-2 text-danger">Featured post</h3>
-          <div className="mb-1 text-muted">Share by: tam@tam.com <Button><ThumbUpIcon/></Button> <Button><ThumbDownIcon/></Button></div>
-          <div className="mb-1 text-muted">99 <ThumbUpIcon/> 10 <ThumbDownIcon/></div>
-          <div className="mb-1">Description:</div>
-          <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This is a wider card with supporting text below as a natural lead-in
-            to additional content.
-          </p>
-        </div>
-      </div>
+        return (
+          <div className="row g-0 flex-md-row mb-4 h-md-250 position-relative">
+            <div className="col-auto d-lg-block">
+              <YouTube
+                videoId={movie.youtubeId}
+                opts={opts}
+                onReady={onPlayerReady}
+              />
+            </div>
+            <div className="col d-flex flex-column position-static ms-5">
+              <h3 className="mb-2 text-danger">{movie.title}</h3>
+              <div className="mb-1 text-muted">
+                Share by: {movie.user.email}
+                {myLike.length > 0 ? (
+                  <>
+                    {myLike[0].like == true ? (
+                      <Button className="ms-2 me-2">
+                        <ThumbUpIcon />
+                      </Button>
+                    ) : (
+                      <Button>
+                        <ThumbDownIcon />
+                      </Button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      color="primary"
+                      className="ms-2 me-2 "
+                      onClick={(e)=>likeMovie(movie.id, true)}
+                    >
+                      <ThumbUpIcon />
+                    </Button>
+                    <Button
+                      color="primary"
+                      onClick={(e)=>likeMovie(movie.id, false)}
+                    >
+                      <ThumbDownIcon />
+                    </Button>
+                  </>
+                )}
+              </div>
+              <div className="mb-1 text-muted">
+                {like} <ThumbUpIcon /> {movie.likeMovies.length - like}{" "}
+                <ThumbDownIcon />
+              </div>
+              <div className="mb-1">Description:</div>
+              <p>{movie.description}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
-
-    
   );
 };
 

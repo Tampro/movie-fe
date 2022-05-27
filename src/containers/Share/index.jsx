@@ -1,22 +1,25 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button, Col } from "reactstrap";
+import { Navigate } from "react-router-dom";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+
 const Share = () => {
+  const auth = useSelector((state: RootState) => state.auth.value);
   return (
     <div className="col-md-6 offset-md-3">
       <Form>
         <fieldset className="border p-4">
-          <legend className="float-none w-auto p-2">Share a Youtube movie</legend>
+          <legend className="float-none w-auto p-2">
+            Share a Youtube movie
+          </legend>
 
           <FormGroup row>
             <Label for="exampleEmail" sm={2}>
               Youtube URL
             </Label>
             <Col sm={10}>
-              <Input
-                type="text"
-                name="youtubeUrl"
-                id="youtubeUrl"
-              />
+              <Input type="text" name="youtubeUrl" id="youtubeUrl" />
             </Col>
           </FormGroup>
           <Col sm={{ size: 10, offset: 2 }} className="ps-1">

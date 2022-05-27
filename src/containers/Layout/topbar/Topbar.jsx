@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import TheaterIcon from "mdi-react/TheaterIcon";
-
 import {
   Navbar,
   NavbarBrand,
@@ -14,21 +13,37 @@ import {
   PopoverBody,
 } from "reactstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth } from "../../../redux/authSlice";
+import { setUser } from "../../../redux/userSlice";
+import { RootState } from "../../../redux/store";
 
 const Topbar = () => {
   const [popoverOpen, setPopoverOpen] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth.value);
+  const user = useSelector((state: RootState) => state.user.value);
+
+  
 
   async function fetchData() {
     try {
       const { data } = await axios.get("user/me");
-      setUser(data);
-    } catch (e) {}
+      if (data) {
+        dispatch(setUser(data));
+        dispatch(setAuth(true));
+      }
+     
+    } catch (e) {
+        dispatch(setUser(null));
+      dispatch(setAuth(false));
+    }
   }
   useEffect(() => {
     (async () => {
+      dispatch(setAuth(false));
       fetchData();
     })();
   }, []);
@@ -67,8 +82,10 @@ const Topbar = () => {
 
   const logout = async () => {
     await axios.post("user/logout", {}, { withCredentials: true });
-    setUser(null);
+    dispatch(setAuth(false));
+    dispatch(setUser(null));
     axios.defaults.headers.common["Authorization"] = "";
+    
   };
 
   return (
@@ -80,7 +97,7 @@ const Topbar = () => {
             FUNNY MOVIES
           </NavbarBrand>
           <ul className="navbar-nav me-auto mb-2 mb-md-0"></ul>
-          {!user ? (
+          {!auth ? (
             <Form inline className="d-flex" onSubmit={submit}>
               <Input
                 id="userEmail"
